@@ -6,7 +6,9 @@ Fast-Reference recipes to solve typical issues.
 **** Cannot resolve slick.driver
 **************************************
 
-In the build.sbt we must include
+(The versions for slick and slf4 should be taken 
+accordingly to our development environment.)
+In the build.sbt we must include:
 
 libraryDependencies ++= Seq(
     "com.typesafe.slick" %% "slick" % "3.1.1",
@@ -14,18 +16,10 @@ libraryDependencies ++= Seq(
 
 resolvers += "typesafe" at "http://repo.typesafe.com/typesafe/releases/"
 
-The versions for slick and slf4 should be taken 
-accordingly to our development environment.
-
 *****************************************
 **** Adding ScalaTest to Eclipse IDE
 *****************************************
 
-Download scalatest jar
+Download scalatest jar -->
 Right Click in --> "Project" Folder --> Build Path --> Add External Archives --> Select the downloaded jar file
-Import this package in our class --> import org.scalatest._
-
-
-
-
-
+--> Then, we must import this package in our class: import org.scalatest._
