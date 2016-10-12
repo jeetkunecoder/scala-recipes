@@ -46,6 +46,17 @@ class Main extends FlatSpec with Matchers {
     val l = List(1, 2, 3, 4, 5, 6, 7)
     P04.length(l) should be(7)
   }
+
+  // P05(*) Reverse a list
+  it should "reverse a list" in {
+    val l = List(1, 2, 3, 4, 5)
+    P05.reverse(l) should be(List(5, 4, 3, 2, 1))
+  }
+  
+  it should "reverse a list using recursion" in {
+    val l = List(5, 6, 7, 8)
+    P05.reverseRec(l) should be(List(8, 7, 6, 5))
+  }
   
   // P34(*) A list of Prime Numbers
 
@@ -96,7 +107,10 @@ object P02 {
 object P03 {
   
   def kth[A](l: List[A], n: Int) = l(n)
-  
+  def kthRec[A](l: List[A], n: Int): A = l match {
+    case x :: xs if(n == 0) => x 
+    case x :: xs if(n > 0) => kthRec(xs, n - 1)
+  }
 }
 
 /**
@@ -113,6 +127,19 @@ object P04 {
   def length2[A](l: List[A]): Int = l match {
     case Nil => 0
     case x :: xs => 1 + length2(xs) 
+  }
+}
+
+/**
+ * P05
+ * reverse: Reverse the elements of a list 
+ */
+
+object P05 {
+  def reverse[A](l: List[A]): List[A] = l.reverse
+  def reverseRec[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case x :: xs => reverseRec(xs) ::: List(x)
   }
 }
 
