@@ -58,6 +58,17 @@ class Main extends FlatSpec with Matchers {
     P05.reverseRec(l) should be(List(8, 7, 6, 5))
   }
   
+  // P06(*) Find out whether a list is palindrome
+  it should "return true when list is palindrome" in {
+    val l = List("a", "b", "b", "a")
+    P06.isPalindrome(l) should be(true)
+  }
+  
+  it should "return false when list isn't palindrome" in {
+    val l = List(1, 2, 3, 4, 5)
+    P06.isPalindrome(l) should be(false)
+  }
+  
   // P34(*) A list of Prime Numbers
 
   it should "list 2, 3, 5, 7 as prime numbers between 0 and 10" in {
@@ -74,103 +85,4 @@ class Main extends FlatSpec with Matchers {
     primeNumbers should have length 8
     primeNumbers should be (List(7, 11, 13, 17, 19, 23, 29, 31))
   }
-}
-
-/**
- * PO1 Solver
- * last: Finds the last element of a list
- */
-
-class P01 {
-  
-  def last[A](l: List[A]): A = l.last
-  
-}
-
-/**
- * P02 Solver 
- * penultimate: Finds the penultimate element in a list
- */
-
-object P02 {
-  
-  def penultimate[A](l: List[A]): A = l.dropRight(1).last
-  def penultimate2[A](l: List[A]): A = l.reverse.drop(1).head
-  
-}
-
-/**
- * P03 Solver
- * nth: Find the k-th element in a list
- */
-
-object P03 {
-  
-  def kth[A](l: List[A], n: Int) = l(n)
-  def kthRec[A](l: List[A], n: Int): A = l match {
-    case x :: xs if(n == 0) => x 
-    case x :: xs if(n > 0) => kthRec(xs, n - 1)
-  }
-}
-
-/**
- * P04 Solver
- * length: Find the number of elements of a list
- */
-
-object P04 {
-  
-  // Simplest way using the standard library
-  def length[A](l: List[A]): Int = l.length
-  
-  // We can also use pattern matching
-  def length2[A](l: List[A]): Int = l match {
-    case Nil => 0
-    case x :: xs => 1 + length2(xs) 
-  }
-}
-
-/**
- * P05
- * reverse: Reverse the elements of a list 
- */
-
-object P05 {
-  def reverse[A](l: List[A]): List[A] = l.reverse
-  def reverseRec[A](l: List[A]): List[A] = l match {
-    case Nil => Nil
-    case x :: xs => reverseRec(xs) ::: List(x)
-  }
-}
-
-/**
- * P31 Solver 
- * isPrime: Determine whether a given integer number is prime
- */
-
-object P31 {
-  
-  def isPrime(n: Int): Boolean = {
-    if (n < 2) false
-    else !((2 to n - 1) exists (x => n % x == 0))
-  }
-  
-  def isPrime2(n: Int): Boolean = {
-    if (n < 2) false 
-    else !((2 to Math.sqrt(n).toInt) exists (x => n % x == 0))
-  }
-}
-
-/**
- * P34 Solver
- * primeNumbers: Obtains the prime numbers in a given sequence 
- */
-
-object P34 {
-  def isPrime(n: Int): Boolean = {
-    if (n < 2) false 
-    else !((2 to Math.sqrt(n).toInt) exists (x => n % x == 0))
-  }
-  
-  def primeNumbers(l: List[Int]): List[Int] = l.filter(x => isPrime(x))
 }
