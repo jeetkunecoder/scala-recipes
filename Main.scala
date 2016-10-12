@@ -36,6 +36,16 @@ class Main extends FlatSpec with Matchers {
     val l = List(1, 2, 3, 4, 5)  
     P03.kth(l, 2) should be(3)
   }
+
+  // P04(*) Find the number of elements of a list
+  it should "be zero when list is empty" in {
+    P04.length(List()) should be(0)  
+  }
+  
+  it should "be 7 when the list have seven elements" in {
+    val l = List(1, 2, 3, 4, 5, 6, 7)
+    P04.length(l) should be(7)
+  }
   
   // P34(*) A list of Prime Numbers
 
@@ -87,6 +97,23 @@ object P03 {
   
   def kth[A](l: List[A], n: Int) = l(n)
   
+}
+
+/**
+ * P04 Solver
+ * length: Find the number of elements of a list
+ */
+
+object P04 {
+  
+  // Simplest way using the standard library
+  def length[A](l: List[A]): Int = l.length
+  
+  // We can also use pattern matching
+  def length2[A](l: List[A]): Int = l match {
+    case Nil => 0
+    case x :: xs => 1 + length2(xs) 
+  }
 }
 
 /**
